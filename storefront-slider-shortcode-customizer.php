@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: Storefront Slider Customizer
+ * Plugin Name: Storefront Add Slider from Shortcode
  * Inspired by and based on the "Storefront Add Slider" Plugin with a few more added Customizer options
- * Plugin URI: https://lemsmyth.com/plugins/storefront-slider-customizer
+ * Plugin URI: https://lemsmyth.com/plugins/storefront-add-slider-shortcode
  * Description: Lets you add a slider shortcode to your Storefront theme Frontpage.
  * Author: lemsmyth
  * Author URI: http://lemsmyth.com
  * Version: 0.1
- * Text Domain: storefront-slider-customizer
+ * Text Domain: storefront-add-slider-shortcode
  *
  *
  * Storefront Slider Customizer is free software: you can redistribute it and/or modify
