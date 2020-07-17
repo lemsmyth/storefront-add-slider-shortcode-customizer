@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Storefront Add Slider Shortcode in Customizer
- * Inspired by and based on the "Storefront Add Slider" Plugin with a few more added Customizer options
+ * Inspired by the "Storefront Add Slider" Plugin with a few more added Customizer options
  * Plugin URI: https://lemsmyth.com/plugins/storefront-add-slider-shortcode-in-customizer
  * Description: Lets you add a slider shortcode to your Storefront theme Frontpage.
  * Author: lemsmyth
@@ -45,21 +45,38 @@ function lems_setup_if_storefront_active() {
 
 		public function render_content() { ?>
 
-			<label>
+	 		<label>
 			<?php if ( !empty( $this->label ) ) : ?>
-				<span class="customize-control-title bellini-pro__title">
-					<?php echo esc_html( $this->label ); ?>
-				</span>
-			<?php endif; ?>
-			</label>
+	 			<span class="customize-control-title lems-pro__title">
+	 				<?php echo esc_html( $this->label ); ?>
+	 			</span>
+	 		<?php endif; ?>
+	 		</label>
 
-			<?php if ( !empty( $this->description ) ) : ?>
-				<span class="description bellini-pro__description">
-					<?php echo $this->description; ?>
-				</span>
-			<?php endif;
+	 		<?php if ( !empty( $this->description ) ) : ?>
+	 			<span class="description lems-pro__description">
+	 				<?php echo $this->description; ?>
+	 			</span>
+	 		<?php endif;
 		}
 	}
+
+	$third_party_slider_description = sprintf( __( 'Enjoying <a target="_blank" href="%s">Storefront Add Slider Shortcode from the Customizer</a>? Consider leaving us a <a href="%s">review</a>.', 'storefront' ), esc_url( 'https://wordpress.org/plugins/storefront-add-slider-shortcode-to-customizer/' ), esc_url( 'https://wordpress.org/storefront-add-slider-shortcode-to-customizer/review/'));
+
+		$wp_customize->add_setting( 'lems_front_block_pro_conversion',
+			array(
+				'type' 				=> 'theme_mod',
+				'sanitize_callback' => 'sanitize_key',
+				)
+		);
+				$wp_customize->add_control( new Custom_Subtitle ( $wp_customize, 'lems_front_block_pro_conversion',
+					array(
+						'label' => esc_html__('','storefront'),
+						'description' => $third_party_slider_description,
+						'section' => 'static_front_page',
+						'settings'    => 'lems_front_block_pro_conversion',
+						'priority'   => 55,
+				)) );
 
 		$wp_customize->add_setting('storefront_slider_shortcode_field', array(
 				'type' 				=> 'theme_mod',
@@ -70,8 +87,8 @@ function lems_setup_if_storefront_active() {
 
 				$wp_customize->add_control('storefront_slider_shortcode_field',array(
 					'type' 			=>'text',
-					'label'     => esc_html__( 'Slider Shortcode', 'storefront-add-slider-shortcode-in-customizer' ),
-					'description'	=> esc_html__( 'You can insert your Meta Slider, Smart Slider 3, Soliloquy, Revolution Slider, LayerSlider shortcode here.', 'storefront-add-slider-shortcode-in-customizer' ),
+					'label'     => esc_html__( 'Slider Shortcode', 'storefront' ),
+					'description'	=> esc_html__( 'You can insert your Meta Slider, Smart Slider 3, Soliloquy, Revolution Slider, LayerSlider shortcode here.', 'storefront' ),
 					'section'   => 'static_front_page',
 					'settings'  => 'storefront_slider_shortcode_field',
 					'priority'  => 20,
@@ -88,7 +105,7 @@ function lems_setup_if_storefront_active() {
 		);
 
 		$wp_customize->add_control( 'storefront_hide_homepage_title', array(
-				'label'				=> esc_html__( 'Hide the Home title heading', 'storefront-add-slider-shortcode-in-customizer' ),
+				'label'				=> esc_html__( 'Hide the Home title heading', 'storefront' ),
 				'section'			=> 'static_front_page',
 				'settings'		=> 'storefront_hide_homepage_title',
 				'priority'		=> 30,
@@ -108,7 +125,7 @@ function lems_setup_if_storefront_active() {
 		);
 
 		$wp_customize->add_control( 'storefront_slider_full_width', array(
-				'label'			=> esc_html__( 'Make Slider full window width', 'storefront-add-slider-shortcode-in-customizer' ),
+				'label'			=> esc_html__( 'Make Slider full window width', 'storefront' ),
 				'section'		=> 'static_front_page',
 				'settings'	=> 'storefront_slider_full_width',
 				'priority'	=> 40,
@@ -128,7 +145,7 @@ function lems_setup_if_storefront_active() {
 		);
 
 			$wp_customize->add_control( 'storefront_slider_all_pages', array(
-					'label'      => esc_html__( 'Show Frontpage Slider on All Pages', 'storefront-add-slider-shortcode-in-customizer' ),
+					'label'      => esc_html__( 'Show Frontpage Slider on All Pages', 'storefront' ),
 					'section'    => 'static_front_page',
 					'settings'   => 'storefront_slider_all_pages',
 					'priority'   => 50,
@@ -148,7 +165,7 @@ function lems_setup_if_storefront_active() {
 				?>
 				</section><?php
 				} else {
-				echo esc_html_e( 'No Slider Shortcode Found!', 'storefront-add-slider-shortcode-in-customizer' );
+				echo esc_html_e( 'No Slider Shortcode Found!', 'storefront' );
 		}
 			}
 			if ( get_theme_mod('storefront_slider_full_width') == true ) {
@@ -165,7 +182,7 @@ function lems_setup_if_storefront_active() {
 						?>
 						</section><?php
 						} else {
-					echo esc_html_e( 'No Slider Shortcode Found!', 'storefront-add-slider-shortcode-in-customizer' );
+					echo esc_html_e( 'No Slider Shortcode Found!', 'storefront' );
 						}
 					}
 			}
@@ -198,7 +215,7 @@ function lems_setup_if_storefront_active() {
 	 */
 		function lems_install_storefront_notice() {
 			echo '<div class="notice is-dismissible updated">
-			<p>' . __( 'Storefront Slider Shortcode Customizer plugin requires that you use Storefront as your parent theme.', 'storefront-add-slider-shortcode-in-customizer' ) . ' <a href="' . esc_url( wp_nonce_url( self_admin_url( 'update.php?action=install-theme&theme=storefront' ), 'install-theme-storefront' ) ) . '">' . __( 'Install Storefront now', 'storefront-add-slider-shortcode-in-customizer' ) . '</a></p>
+			<p>' . __( 'Storefront Slider Shortcode Customizer plugin requires that you use Storefront as your parent theme.', 'storefront-slider-shortcode-customizer' ) . ' <a href="' . esc_url( wp_nonce_url( self_admin_url( 'update.php?action=install-theme&theme=storefront' ), 'install-theme-storefront' ) ) . '">' . __( 'Install Storefront now', 'storefront-slider-shortcode-customizer' ) . '</a></p>
 			</div>';
 		}
 }
